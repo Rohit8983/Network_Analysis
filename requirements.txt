@@ -1,0 +1,10 @@
+numpy==2.1.2
+pandas==2.2.3
+scapy==2.6.1
+pyshark==0.6
+scikit-learn==1.5.2
+streamlit==1.39.0
+plotly==5.24.1
+tensorflow==2.20.0
+python-dotenv==1.0.1
+requests==2.32.3
