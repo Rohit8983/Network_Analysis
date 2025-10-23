@@ -1,16 +1,26 @@
-numpy==2.1.2
+# Core data and ML packages
+numpy==1.26.2
 pandas==2.2.3
+scikit-learn==1.5.2
 scapy==2.6.1
 pyshark==0.6
-scikit-learn==1.5.2
+
+# Streamlit & visualization
 streamlit==1.39.0
 streamlit-autorefresh==1.0.1
 plotly==5.24.1
-tensorflow==2.20.0
-python-dotenv==1.0.1
+networkx==3.2
+pyvis==0.3.2
+
+# TensorFlow (downgraded to avoid protobuf conflict)
+tensorflow==2.12.0
+
+# Utilities
 requests==2.32.3
 paramiko==3.5.0
 cryptography>=42.0.0
-networkx==3.2  # Compatible with Python 3.11
-pyvis==0.3.2   # Last version compatible with Python 3.11
+python-dotenv==1.0.1
+
+# Optional: Google AI packages (commented out to avoid protobuf conflict)
 google-generativeai==0.3.0
+google-ai-generativelanguage==0.4.0
