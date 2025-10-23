@@ -8,3 +8,5 @@ plotly==5.24.1
 tensorflow==2.20.0
 python-dotenv==1.0.1
 requests==2.32.3
+paramiko==3.5.0
+cryptography>=42.0.0
