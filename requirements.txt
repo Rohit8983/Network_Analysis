@@ -1,4 +1,4 @@
-numpy==1.23.6
+numpy==1.23.5
 pandas==2.0.3
 scapy==2.6.1
 pyshark==0.6
@@ -13,6 +13,6 @@ paramiko==3.5.0
 cryptography>=42.0.0
 networkx==3.2
 pyvis==0.3.2
-# Comment out generative AI packages for now if causing conflicts
+# Optional: comment out Google AI packages for now
 google-generativeai==0.3.0
 google-ai-generativelanguage==0.4.0
