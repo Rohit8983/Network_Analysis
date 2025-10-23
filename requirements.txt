@@ -1,8 +1,8 @@
-numpy==1.26.2
-pandas==2.2.3
+numpy==1.23.6
+pandas==2.0.3
 scapy==2.6.1
 pyshark==0.6
-scikit-learn==1.5.2
+scikit-learn==1.2.2
 streamlit==1.39.0
 streamlit-autorefresh==1.0.1
 plotly==5.24.1
@@ -13,6 +13,6 @@ paramiko==3.5.0
 cryptography>=42.0.0
 networkx==3.2
 pyvis==0.3.2
-# Optional: comment out to avoid protobuf conflicts
+# Comment out generative AI packages for now if causing conflicts
 google-generativeai==0.3.0
 google-ai-generativelanguage==0.4.0
