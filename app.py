@@ -340,13 +340,12 @@ else:
         file_name=f'filtered_results_{int(time.time())}.csv',
         mime='text/csv'
     )
-
 # --- 💬 Gemini AI Chat Assistant ---
 st.markdown("## 🧠 Gemini AI Chat Assistant for Network Analysis")
 st.caption("Ask about traffic anomalies, suspicious IPs, or risk insights. Powered by Google Gemini AI.")
 
-# --- Sidebar API Config ---
-GEMINI_API_KEY = st.sidebar.text_input("AIzaSyDWhFYdrPM3rC8r2U2902dFTkQGu9WCOTE", type="password")
+# Sidebar API Config
+GEMINI_API_KEY = st.sidebar.text_input("Enter your Gemini A", type="password")
 GEMINI_MODEL = st.sidebar.selectbox("Model", ["gemini-1.5-pro", "gemini-1.5-flash"], index=0)
 
 if GEMINI_API_KEY:
@@ -355,7 +354,7 @@ if GEMINI_API_KEY:
     except Exception as e:
         st.sidebar.error(f"API Key error: {e}")
 
-# --- Initialize chat history ---
+# Initialize chat history
 if "chat_history" not in st.session_state:
     st.session_state.chat_history = []
 
@@ -364,7 +363,7 @@ for chat in st.session_state.chat_history:
     with st.chat_message(chat["role"]):
         st.markdown(chat["content"])
 
-# --- User input ---
+# User input
 user_input = st.chat_input("Ask about your network...")
 
 if user_input:
@@ -378,7 +377,7 @@ if user_input:
             st.warning("📊 No network data available to analyze.")
         else:
             try:
-                # --- Context building from dataframe ---
+                # Build context
                 top_risks = df[df['combined_risk_score'] > 80][['src', 'dst']].head(5).to_dict('records')
                 summary_context = f"""
                 You are an expert cybersecurity network analyst.
@@ -390,7 +389,6 @@ if user_input:
                 - Top Risky IP Pairs: {top_risks}
                 """
 
-                # --- Combine context + chat memory ---
                 chat_context = "\n".join([f"{m['role']}: {m['content']}" for m in st.session_state.chat_history[-5:]])
                 full_prompt = textwrap.dedent(f"""
                 {summary_context}
@@ -405,18 +403,12 @@ if user_input:
                 Use structured markdown if useful.
                 """)
 
-                # --- Stream AI response ---
                 model = genai.GenerativeModel(GEMINI_MODEL)
                 with st.spinner("Analyzing with Gemini..."):
-                    response = model.generate_content(full_prompt, stream=True)
-                    ai_reply = ""
-                    for chunk in response:
-                        if hasattr(chunk, "text"):
-                            ai_reply += chunk.text
-                            st.markdown(chunk.text)
+                    response = model.generate_content(full_prompt)
+                    ai_reply = response.text
+                    st.markdown(ai_reply)
 
-                # Store in session
                 st.session_state.chat_history.append({"role": "assistant", "content": ai_reply})
-
             except Exception as e:
                 st.error(f"Gemini AI error: {e}")
